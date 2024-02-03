@@ -1,10 +1,8 @@
 package com.ramon.simplifiedpaymentapi.domain.user;
 
+import com.ramon.simplifiedpaymentapi.dtos.UserDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -13,7 +11,9 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +35,15 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public  User(UserDTO userDTO) {
+        this.firstName = userDTO.firsName();
+        this.lastName = userDTO.lastName();
+        this.document = userDTO.document();
+        this.email = userDTO.email();
+        this.password = userDTO.password();
+        this.balance = userDTO.balance();
+        this.userType = userDTO.userType();
+    }
 
 }
